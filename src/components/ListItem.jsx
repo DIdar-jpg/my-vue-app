@@ -1,12 +1,15 @@
-import React from 'react'
+import { useContext } from 'react'
+import ModalContext from './ModalContext.js'
 
 export default function ListItem({ clientData }) {
-
+    
     const {id, name, surname, dateOfBirth, sex, marital, number} = clientData
     
+    const { handleShow } = useContext(ModalContext)
+
     return (
         <>
-            <tr>
+            <tr onClick={handleShow}>
                 <td>{id}</td>
                 <td>{name}</td>
                 <td>{surname}</td>
@@ -15,8 +18,6 @@ export default function ListItem({ clientData }) {
                 <td>{marital ? 'married' : 'single'}</td>
                 <td>{number}</td>
             </tr>
-
-
         </>
         
   )
