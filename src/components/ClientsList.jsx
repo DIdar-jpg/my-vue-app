@@ -3,26 +3,16 @@ import Table from 'react-bootstrap/Table';
 import ListItem from './ListItem.jsx';
 import ClientsModal from './ClientsModal.jsx'
 import ModalContext from './ModalContext.js'
-
+import useFetch from '../hooks/useFetch.js'
 export default function ClientsList() {
-  const [ data, setData ] = useState(null)
 
-  const getData = async url => {  
-    const request = await fetch(url)
-    return request.json()
-  }
-  // Создаём функцию, которая получает данные(делает запрос).
-
-  useEffect( () => { 
-    getData('https://67891f1e2c874e66b7d7ac43.mockapi.io/products/clients')
-    .then( res => { setData(res) })
-  }, [])
+  const { data } = useFetch()
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  console.log(data)
   return (
     <ModalContext.Provider value={{show, setShow, handleClose, handleShow}}>
       <ClientsModal />
